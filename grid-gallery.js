@@ -1,4 +1,4 @@
-const path = 'http://localhost:3000/api';
+const path = 'http://localhost:3000';
 
 function buildSnackCard(snack) {
   const col4 = document.createElement('div');
@@ -17,9 +17,12 @@ function buildSnackCard(snack) {
   header.appendChild(title);
 
   const textLink = document.createElement('a');
-  textLink.href = `${path}/snacks/${snack.id}`;
   textLink.className = 'title-link';
   textLink.textContent = snack.name;
+  textLink.addEventListener('click', (e) => {
+    localStorage.setItem('snack', JSON.stringify(snack));
+    window.location.href = './product.html';
+  });
   title.appendChild(textLink);
 
   const cardImage = document.createElement('div');
@@ -31,7 +34,10 @@ function buildSnackCard(snack) {
   cardImage.appendChild(figure);
 
   const imgLink = document.createElement('a');
-  imgLink.href = `${path}/snacks/${snack.id}`;
+  imgLink.addEventListener('click', (e) => {
+    localStorage.setItem('snack', JSON.stringify(snack));
+    window.location.href = './product.html';
+  });
   figure.appendChild(imgLink);
 
   const image = document.createElement('img');
@@ -49,20 +55,22 @@ function buildSnackCard(snack) {
 
   const likes = document.createElement('span');
   likes.className = 'likes';
-  likes.textContent = 'Rating: 4.5 / 5';
+  likes.textContent = `Rating: ${parseFloat(snack.avgRating) || 'N/A'}`;
   panel.appendChild(likes);
 
-  const likesIcon = document.createElement('span');
-  likesIcon.className = 'icon';
-  likes.appendChild(likesIcon);
+  if (snack.avgRating) {
+    const likesIcon = document.createElement('span');
+    likesIcon.className = 'icon';
+    likes.appendChild(likesIcon);
 
-  const faStar = document.createElement('i');
-  faStar.className = 'fa fa-star';
-  likesIcon.appendChild(faStar);
+    const faStar = document.createElement('i');
+    faStar.className = 'fa fa-star';
+    likesIcon.appendChild(faStar);
+  }
 
   const comments = document.createElement('span');
   comments.className = 'comments';
-  comments.textContent = '10 reviews';
+  comments.textContent = `${snack.reviewCount} Reviews`;
   panel.appendChild(comments);
 
   const commentsIcon = document.createElement('span');
@@ -78,7 +86,7 @@ function buildSnackCard(snack) {
 
 const snackGrid = document.querySelector('#snack-grid');
 
-axios.get(`${path}/snacks`)
+axios.get(`${path}/api/snacks`)
   .then(response => {
     let snacks = response.data.data;
     snacks.forEach(snack => {

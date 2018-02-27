@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Register - Free Bulma template</title>
+  <title>Register - Galvanize Snacks</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" id="bulma" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.2/css/bulma.min.css" />
   <link rel="stylesheet" type="text/css" href="./css/base.css">
@@ -19,30 +19,30 @@
               Register an Account
             </h1>
             <div class="box">
-              <label class="label">Name</label>
+              <label class="label">First Name</label>
               <p class="control">
-                <input class="input" type="text" placeholder="John Smith">
+                <input class="input" type="text" placeholder="John" id='fn'>
               </p>
-              <label class="label">Username</label>
+              <label class="label">Last Name</label>
               <p class="control">
-                <input class="input" type="text" placeholder="jsmith">
+                <input class="input" type="text" placeholder="Smith" id='ln'>
               </p>
               <label class="label">Email</label>
               <p class="control">
-                <input class="input" type="text" placeholder="jsmith@example.org">
+                <input class="input" type="text" placeholder="jsmith@example.org" id='email'>
               </p>
-              <hr>
+              <!-- <hr> -->
               <label class="label">Password</label>
               <p class="control">
-                <input class="input" type="password" placeholder="●●●●●●●">
+                <input class="input" type="password" placeholder="●●●●●●●" id='pw'>
               </p>
-              <label class="label">Confirm Password</label>
+              <!-- <label class="label">Confirm Password</label>
               <p class="control">
-                <input class="input" type="password" placeholder="●●●●●●●">
-              </p>
+                <input class="input" type="password" placeholder="●●●●●●●" id='cpw'>
+              </p> -->
               <hr>
               <p class="control">
-                <button class="button is-primary">Register</button>
+                <button class="button is-primary" id='register'>Register</button>
                 <button class="button is-default">Cancel</button>
               </p>
             </div>
@@ -53,9 +53,22 @@
             </p>
           </div>
         </div>
+        <div class="columns is-vcentered" id='fail'>
+          <div class="column is-4 is-offset-4">
+            <article class="message is-danger">
+              <div class="message-header">
+                <p><b>Account Not Created</b></p>
+                <button class="delete" aria-label="delete" id='fail-button'></button>
+              </div>
+              <div class="message-body" id='fail-message'>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
-
   </section>
+  <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+  <script src='./register.js'></script>
 </body>
 </html>
