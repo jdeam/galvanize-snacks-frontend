@@ -1,4 +1,8 @@
 const path = 'http://localhost:3000';
+const user = JSON.parse(localStorage.getItem('user')) || { firstName: 'Everett', userId: 2 };
+
+const helloName = document.querySelector('#hello-name');
+helloName.textContent = `Hello, ${user.firstName}`;
 
 const logoutButton = document.querySelector('#log-out');
 logoutButton.addEventListener('click', (e) => {

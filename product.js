@@ -1,15 +1,17 @@
 ///FOR TESTING PURPOSES - REMOVE 'OR' STATEMENT IN PROD
-const user = JSON.parse(localStorage.getItem('user')) || { userId : 2 };
+const user = JSON.parse(localStorage.getItem('user')) || { firstName: 'Everett', userId: 2 };
 const path = 'http://localhost:3000';
 
 let snack = JSON.parse(localStorage.getItem('snack'));
+
+const helloName = document.querySelector('#hello-name');
+helloName.textContent = `Hello, ${user.firstName}`;
 
 const logoutButton = document.querySelector('#log-out');
 logoutButton.addEventListener('click', (e) => {
   localStorage.removeItem('authToken');
   window.location.href = 'login.html';
 });
-
 
 const snackName = document.querySelector('#snack-name');
 const snackPrice = document.querySelector('#snack-price');
@@ -224,7 +226,6 @@ function buildEditButton(review) {
     reviewForm.style.display = 'none';
     populateEditForm(review);
     editForm.style.display = 'block';
-
   });
 
   return span;
