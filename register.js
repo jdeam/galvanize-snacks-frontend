@@ -9,12 +9,19 @@ failButton.addEventListener('click', (e) => {
 });
 
 const registerButton = document.querySelector('#register');
+const cancelButton = document.querySelector('#cancel');
 
 const fnField = document.querySelector('#fn');
 const lnField = document.querySelector('#ln');
 const emailField = document.querySelector('#email');
 const pwField = document.querySelector('#pw');
-const cpwField = document.querySelector('#cpw');
+
+cancelButton.addEventListener('click', (e) => {
+  fnField.value = '';
+  lnField.value = '';
+  emailField.value = '';
+  pwField.value = '';
+});
 
 registerButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -28,7 +35,12 @@ registerButton.addEventListener('click', (e) => {
     const formData = { first_name, last_name, email, password };
     axios.post(`${path}/signup`, formData)
       .then(response => {
-        console.log(response);
+        return axios.post(`${path}/login`, { email, password })
+      })
+      .then((response) => {
+        const token = response.headers.auth.split(' ')[1];
+        localStorage.setItem('authToken', token);
+        window.location.href = 'grid-gallery.html';
       })
       .catch(err => {
         failMessage.textContent = 'A user with that email already exists.';

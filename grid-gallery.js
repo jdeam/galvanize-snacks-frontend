@@ -1,5 +1,11 @@
 const path = 'http://localhost:3000';
 
+const logoutButton = document.querySelector('#log-out');
+logoutButton.addEventListener('click', (e) => {
+  localStorage.removeItem('authToken');
+  window.location.href = 'login.html';
+});
+
 function buildSnackCard(snack) {
   const col4 = document.createElement('div');
   col4.className = 'column is-4';
@@ -21,7 +27,7 @@ function buildSnackCard(snack) {
   textLink.textContent = snack.name;
   textLink.addEventListener('click', (e) => {
     localStorage.setItem('snack', JSON.stringify(snack));
-    window.location.href = './product.html';
+    window.location.href = 'product.html';
   });
   title.appendChild(textLink);
 
@@ -36,7 +42,7 @@ function buildSnackCard(snack) {
   const imgLink = document.createElement('a');
   imgLink.addEventListener('click', (e) => {
     localStorage.setItem('snack', JSON.stringify(snack));
-    window.location.href = './product.html';
+    window.location.href = 'product.html';
   });
   figure.appendChild(imgLink);
 
