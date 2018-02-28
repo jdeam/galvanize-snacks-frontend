@@ -79,10 +79,10 @@
             <input class="input" type="text" id='review-title'>
           </div>
         </div>
-        <div class="field" id='review-field'>
+        <div class="field">
           <label class="label" id='rating-label'>Rating:</label>
-          <div class="control" id='star-input'>
-            <a><span>
+          <div class="control star-control">
+            <a><span id='star-input'>
               <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
               <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
               <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
@@ -102,7 +102,41 @@
             <button class="button is-text" id='review-submit'>Submit</button>
           </div>
           <div class="control is-multi">
-            <button class="button is-link">Cancel</button>
+            <button class="button is-link" id='review-cancel'>Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class='box' id='edit-review-form'>
+        <div class="field">
+          <label class="label">Title:</label>
+          <div class="control">
+            <input class="input" type="text" id='edit-review-title'>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" id='edit-rating-label'>Rating:</label>
+          <div class="control star-control">
+            <a><span id='edit-star-input'>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+            </span></a>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Review:</label>
+          <div class="control">
+            <textarea class="textarea" id='edit-review-text'></textarea>
+          </div>
+        </div>
+        <div class="multi-button">
+          <div class="control is-multi">
+            <button class="button is-text" id='edit-review-submit'>Submit edits</button>
+          </div>
+          <div class="control is-multi">
+            <button class="button is-link" id='edit-review-cancel'>Cancel</button>
           </div>
         </div>
       </div>

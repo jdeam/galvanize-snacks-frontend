@@ -36,11 +36,16 @@ body {
   display: none;
 }
 
-#star-input {
+.star-control {
   height: 27px;
 }
 
 #rating-label {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#edit-rating-label {
   margin-top: 8px;
   margin-bottom: 0;
 }
@@ -57,4 +62,8 @@ span.is-right {
 
 span.is-right i:hover {
   color: black;
+}
+
+#edit-review-form {
+  display: none;
 }
