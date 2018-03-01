@@ -1,4 +1,3 @@
-///FOR TESTING PURPOSES - REMOVE 'OR' STATEMENT IN PROD
 const path = 'http://localhost:3000';
 
 let snack = JSON.parse(localStorage.getItem('snack'));
@@ -222,6 +221,7 @@ function buildEditButton(review) {
   a.appendChild(i);
 
   a.addEventListener('click', (e) => {
+    reviewTab.scrollIntoView(true);
     writeReviewTab.parentNode.className = '';
     reviewTab.parentNode.className = 'is-active';
     reviewForm.style.display = 'none';
@@ -266,7 +266,7 @@ function buildTrashButton(review) {
 }
 
 function clearReviews() {
-  while (reviewSection.children.length > 2) {
+  while (reviewSection.children.length > 3) {
     reviewSection.removeChild(reviewSection.lastChild);
   }
 }
