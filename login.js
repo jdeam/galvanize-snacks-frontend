@@ -1,7 +1,7 @@
 (function() {
   // IIFE used to avoid global scoping issues. If something here is needed
   // globally, attach it to the window.
-  const baseURL = `http://localhost:3000`;
+  const baseURL = `https://everett-jordan-gsnacks.herokuapp.com`;
   const submit = document.querySelector('#login');
   const emailInput = document.querySelector('#email');
   const passwordInput = document.querySelector('#password');

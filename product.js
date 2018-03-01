@@ -1,4 +1,4 @@
-const path = 'http://localhost:3000';
+const path = 'https://everett-jordan-gsnacks.herokuapp.com';
 
 let snack = JSON.parse(localStorage.getItem('snack'));
 

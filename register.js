@@ -1,4 +1,4 @@
-const path = 'http://localhost:3000';
+const path = 'https://everett-jordan-gsnacks.herokuapp.com';
 
 const fail = document.querySelector('#fail');
 const failMessage = document.querySelector('#fail-message')

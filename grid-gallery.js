@@ -1,4 +1,4 @@
-const path = 'http://localhost:3000';
+const path = 'https://everett-jordan-gsnacks.herokuapp.com';
 const user = JSON.parse(localStorage.getItem('user'));
 
 const helloName = document.querySelector('#hello-name');
