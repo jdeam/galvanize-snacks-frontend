@@ -2,7 +2,6 @@ const path = 'http://localhost:3000';
 const user = JSON.parse(localStorage.getItem('user'));
 
 const helloName = document.querySelector('#hello-name');
-helloName.textContent = `Hello, ${user.firstName}`;
 
 const logoutButton = document.querySelector('#log-out');
 logoutButton.addEventListener('click', (e) => {
@@ -96,9 +95,10 @@ function buildSnackCard(snack) {
 
 const snackGrid = document.querySelector('#snack-grid');
 
-axios.get(`${path}/api/snacks`)
+axios.get(`${path}/api/snacks`, { headers: { token: localStorage.getItem('authToken') } })
   .then(response => {
     let snacks = response.data.data;
+    helloName.textContent = `Hello, ${response.data.first_name}`;
     snacks.forEach(snack => {
       const snackCard = buildSnackCard(snack);
       let targetRow = snackGrid.lastElementChild;

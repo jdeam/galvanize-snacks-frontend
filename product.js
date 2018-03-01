@@ -221,7 +221,7 @@ function buildEditButton(review) {
   a.appendChild(i);
 
   a.addEventListener('click', (e) => {
-    reviewTab.scrollIntoView(true);
+    reviewTab.scrollIntoView({ behavior: 'smooth', block: 'start' });
     writeReviewTab.parentNode.className = '';
     reviewTab.parentNode.className = 'is-active';
     reviewForm.style.display = 'none';
