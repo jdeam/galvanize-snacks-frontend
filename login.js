@@ -11,7 +11,7 @@
 
   warning.style.visibility = 'hidden';
   /* Uncomment the removeItem() line for testing purposes */
-  // localStorage.removeItem('authToken');
+  localStorage.removeItem('authToken');
   if (localStorage.getItem('authToken')) {
     window.location.replace('grid-gallery.html');
   }
@@ -34,6 +34,7 @@
         })
         .then((response) => {
           const token = response.headers.auth.split(' ')[1];
+          localStorage.setItem('user', JSON.stringify(response.data.user));
           localStorage.setItem('authToken', token);
           window.location.href = 'grid-gallery.html';
         })

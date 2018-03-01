@@ -13,7 +13,7 @@
   <nav class="nav has-shadow" id="top">
     <div class="container">
       <div class="nav-left">
-        <a class="nav-item" href="../index.html">
+        <a class="nav-item" href="grid-gallery.html">
           <h1 class='title is-1'>Galvanize Snacks</h1>
         </a>
       </div>
@@ -23,12 +23,11 @@
         <span></span>
       </span>
       <div class="nav-right nav-menu">
+        <span class="nav-item" id='hello-name'>
+        </span>
         <span class="nav-item">
-          <a class="button">
-            Log in
-          </a>
-          <a class="button is-info">
-            Sign up
+          <a class="button" id="log-out">
+            Log out
           </a>
         </span>
       </div>
@@ -39,27 +38,27 @@
       <div class="columns">
         <div class="column is-6">
           <div class="image is-2by2">
-            <img src="https://placehold.it/1000x1000">
+            <img id='snack-image'>
           </div>
         </div>
         <div class="column is-5 is-offset-1">
-          <div class="title is-2">Item Title</div>
-          <p class="title is-3 has-text-muted">$ 39.95</p>
+          <div class="title is-2" id='snack-name'></div>
+          <p class="title is-3 has-text-muted" id='snack-price'></p>
           <hr>
           <br>
-          <p class="">
-            <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-            <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-            <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-            <i class="fa fa-star title is-5"></i>
-            <i class="fa fa-star title is-5"></i>
+          <p>
+            <span id='star-rating'>
+              <i class="fa fa-star-o title is-5" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-5" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-5" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-5" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-5" style="color:#ed6c63"></i>
+            </span>
             &nbsp; &nbsp;
-            <strong>41 Reviews</strong>
-            &nbsp; &nbsp;
-            <a href="#">view all</a>
+            <strong id='review-count'></strong>
           </p>
           <br>
-          <p>Suspendisse sodales metus justo, ullamcorper iaculis purus interdum in. Sed ultricies enim felis, in interdum urna malesuada a. Morbi id ligula vel leo elementum dignissim quis vel purus. Donec iaculis, est ac maximus vestibulum, sapien mi lacinia urna, at laoreet felis lectus nec urna. Fusce egestas, neque vitae blandit scelerisque, leo arcu pellentesque risus, et volutpat neque nunc id massa. Aenean dapibus leo vel purus malesuada, eu ultrices nulla consequat. Duis erat orci, lobortis sed dictum id, pretium a nibh. Mauris pharetra ligula consequat gravida ornare.
+          <p id='snack-desc'>Suspendisse sodales metus justo, ullamcorper iaculis purus interdum in. Sed ultricies enim felis, in interdum urna malesuada a. Morbi id ligula vel leo elementum dignissim quis vel purus. Donec iaculis, est ac maximus vestibulum, sapien mi lacinia urna, at laoreet felis lectus nec urna. Fusce egestas, neque vitae blandit scelerisque, leo arcu pellentesque risus, et volutpat neque nunc id massa. Aenean dapibus leo vel purus malesuada, eu ultrices nulla consequat. Duis erat orci, lobortis sed dictum id, pretium a nibh. Mauris pharetra ligula consequat gravida ornare.
           </p>
           <br>
           <br>
@@ -68,50 +67,101 @@
     </div>
   </div>
   <div class="section">
-    <div class="container">
+    <div class="container" id='review-section'>
       <div class="tabs">
         <ul>
-          <li class="is-active"><a>Reviews</a></li>
+          <li class="is-active"><a id='review-tab'>Reviews</a></li>
+          <li><a id='write-review-tab'>Write a review</a></li>
         </ul>
       </div>
-      <div class="box">
-        <article class="media">
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>Review Title</strong> <small>by John Smith</small>
-                <br>
-                <span>
-                  <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-                  <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-                  <i class="fa fa-star title is-5" style="color:#ed6c63"></i>
-                  <i class="fa fa-star title is-5"></i>
-                  <i class="fa fa-star title is-5"></i>
-                </span>
-                <br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-              </p>
-            </div>
+      <div class='box' id='review-form'>
+        <div class="field">
+          <label class="label">Title:</label>
+          <div class="control">
+            <input class="input" type="text" id='review-title'>
           </div>
-        </article>
+        </div>
+        <div class="field">
+          <label class="label" id='rating-label'>Rating:</label>
+          <div class="control star-control">
+            <a><span id='star-input'>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+            </span></a>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Review:</label>
+          <div class="control">
+            <textarea class="textarea" id='review-text'></textarea>
+          </div>
+        </div>
+        <div class="multi-button">
+          <div class="control is-multi">
+            <button class="button is-text" id='review-submit'>Submit</button>
+          </div>
+          <div class="control is-multi">
+            <button class="button is-link" id='review-cancel'>Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class='box' id='edit-review-form'>
+        <div class="field">
+          <label class="label">Title:</label>
+          <div class="control">
+            <input class="input" type="text" id='edit-review-title'>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" id='edit-rating-label'>Rating:</label>
+          <div class="control star-control">
+            <a><span id='edit-star-input'>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+              <i class="fa fa-star-o title is-4" style="color:#ed6c63"></i>
+            </span></a>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Review:</label>
+          <div class="control">
+            <textarea class="textarea" id='edit-review-text'></textarea>
+          </div>
+        </div>
+        <div class="multi-button">
+          <div class="control is-multi">
+            <button class="button is-text" id='edit-review-submit'>Submit edits</button>
+          </div>
+          <div class="control is-multi">
+            <button class="button is-link" id='edit-review-cancel'>Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class='content' id='no-reviews'>
+        <h3>No reviews yet! Be the first to <a id='review-text-link'>leave a review</a>.</h3>
       </div>
     </div>
   </div>
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC ANS 4.0</a>.
-      </p>
-      <p>
-        <a class="icon" href="https://github.com/jgthms/bulma">
-          <i class="fa fa-github"></i>
-        </a>
-      </p>
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Galvanize Snacks</strong> by Everett Abbott and Jordan Deam.
+        </p>
+        <p>
+          <a class="icon" href="https://github.com/jgthms/bulma">
+            <i class="fa fa-github"></i>
+          </a>
+        </p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+  <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+  <script src='./product.js'></script>
 </body>
 </html>

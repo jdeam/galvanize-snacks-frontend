@@ -21,3 +21,49 @@ body {
 .product-header {
   background-color:#fafafa;
 }
+
+.multi-button {
+  display: flex;
+  margin-top: 10px;
+  height: 35px;
+}
+
+.is-multi {
+  margin-right: 10px;
+}
+
+#review-form {
+  display: none;
+}
+
+.star-control {
+  height: 27px;
+}
+
+#rating-label {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#edit-rating-label {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+#no-reviews {
+  display: none;
+}
+
+span.is-right {
+  float: right;
+  margin-left: 5px;
+  color: black;
+}
+
+span.is-right i:hover {
+  color: black;
+}
+
+#edit-review-form {
+  display: none;
+}
