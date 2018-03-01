@@ -1,11 +1,9 @@
 ///FOR TESTING PURPOSES - REMOVE 'OR' STATEMENT IN PROD
-const user = JSON.parse(localStorage.getItem('user')) || { firstName: 'Everett', userId: 2 };
 const path = 'http://localhost:3000';
 
 let snack = JSON.parse(localStorage.getItem('snack'));
 
 const helloName = document.querySelector('#hello-name');
-helloName.textContent = `Hello, ${user.firstName}`;
 
 const logoutButton = document.querySelector('#log-out');
 logoutButton.addEventListener('click', (e) => {
@@ -71,7 +69,7 @@ writeReviewTab.addEventListener('click', (e) => {
 
 const reviewSection = document.querySelector('#review-section');
 
-function buildReviewBox(review) {
+function buildReviewBox(review, user_id) {
   const box = document.createElement('div');
   box.className = 'box';
 
@@ -90,8 +88,8 @@ function buildReviewBox(review) {
   const p = document.createElement('p');
   p.innerHTML = `<strong>${review.title}</strong> <small>by ${review.first_name} ${review.last_name}`;
   content.appendChild(p);
-
-  if (review.user_id === user.userId) {
+  // user_id
+  if (review.user_id === user_id) {
     const trash = buildTrashButton(review);
     p.appendChild(trash);
     const edit = buildEditButton(review);
@@ -168,19 +166,22 @@ function populateEditForm(review) {
     let title = editTitle.value;
     let rating = editStars.value;
     let text = editText.value;
-    let user_id = user.userId
 
-    if (title && rating && text && user_id) {
-      const formData = { title, rating, text, user_id };
-      axios.put(`${path}/api/snacks/${snack.id}/reviews/${review.id}`, formData)
+    if (title && rating && text) {
+      const formData = { title, rating, text};
+      const token = { token: localStorage.getItem('authToken') };
+      let user_idToRender;
+      axios.put(`${path}/api/snacks/${snack.id}/reviews/${review.id}`, formData, { headers: token })
         .then(response => {
+          user_idToRender = response.data.user_id;
           return axios.get(`${path}/api/snacks/${snack.id}`);
         })
         .then(response => {
           snack = response.data.data;
+          console.log(snack);
           localStorage.setItem('snack', JSON.stringify(snack));
           clearReviews();
-          renderReviews(snack.reviews);
+          renderReviews(snack.reviews, user_idToRender);
           renderAvgAndCount(snack);
           clearEditForm();
         })
@@ -241,17 +242,19 @@ function buildTrashButton(review) {
   const i = document.createElement('i');
   i.className = 'fa fa-trash-o';
   a.appendChild(i);
-
+  let user_idToRender;
   a.addEventListener('click', (e) => {
-    axios.delete(`${path}/api/snacks/${snack.id}/reviews/${review.id}`)
+    const token = { token: localStorage.getItem('authToken') };
+    axios.delete(`${path}/api/snacks/${snack.id}/reviews/${review.id}`, { headers: token })
       .then(response => {
+        user_idToRender = response.data.user_id;
         return axios.get(`${path}/api/snacks/${snack.id}`);
       })
       .then(response => {
         snack = response.data.data;
         localStorage.setItem('snack', JSON.stringify(snack));
         clearReviews();
-        renderReviews(snack.reviews);
+        renderReviews(snack.reviews, user_idToRender);
         renderAvgAndCount(snack);
       })
       .catch(err => {
@@ -323,13 +326,15 @@ submitButton.addEventListener('click', (e) => {
   let title = titleField.value;
   let text = textField.value;
   let rating = starInput.value;
-  let user_id = user.userId;
   let snack_id = snack.id;
 
-  if (title && text && rating && user_id && snack_id) {
-    const formData = { title, text, rating, user_id, snack_id }
-    axios.post(`${path}/api/snacks/${snack.id}/reviews`, formData)
+  if (title && text && rating && snack_id) {
+    const formData = { title, text, rating, snack_id }
+    const token = { token: localStorage.getItem('authToken') };
+    let user_idToRender;
+    axios.post(`${path}/api/snacks/${snack.id}/reviews`, formData, { headers: token })
       .then(response => {
+        user_idToRender = response.data.user_id;
         return axios.get(`${path}/api/snacks/${snack.id}`);
       })
       .then(response => {
@@ -339,7 +344,7 @@ submitButton.addEventListener('click', (e) => {
         reviewForm.style.display = 'none';
         renderAvgAndCount(snack);;
         clearReviews();
-        renderReviews(snack.reviews);
+        renderReviews(snack.reviews, user_idToRender);
         localStorage.setItem('snack', JSON.stringify(snack));
         titleField.value = '';
         textField.value = '';
@@ -353,21 +358,22 @@ submitButton.addEventListener('click', (e) => {
   }
 });
 
-function renderReviews(reviews) {
+function renderReviews(reviews, user_id) {
   reviews.forEach(review => {
-    const reviewBox = buildReviewBox(review);
+    const reviewBox = buildReviewBox(review, user_id);
     reviewSection.appendChild(reviewBox);
   });
 }
 
-axios.get(`${path}/api/snacks/${snack.id}/reviews`)
+axios.get(`${path}/api/snacks/${snack.id}/reviews`, {headers: { token: localStorage.getItem('authToken') } } )
   .then(response => {
     const reviews = response.data.data;
     snack.reviews = reviews;
+    helloName.textContent = `Hello, ${response.data.first_name}`;
     if (!reviews.length) {
       noReviewMessage.style.display = 'block';
     } else {
-      renderReviews(reviews);
+      renderReviews(reviews, response.data.user_id);
     }
   })
   .catch(err => {

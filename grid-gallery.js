@@ -1,5 +1,5 @@
 const path = 'http://localhost:3000';
-const user = JSON.parse(localStorage.getItem('user')) || { firstName: 'Everett', userId: 2 };
+const user = JSON.parse(localStorage.getItem('user'));
 
 const helloName = document.querySelector('#hello-name');
 helloName.textContent = `Hello, ${user.firstName}`;
